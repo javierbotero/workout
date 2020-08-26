@@ -1,8 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'support/factory_bot'
-require 'capybara/rails'
-require 'spec/database_cleaner'
+require 'capybara/rspec'
+require 'support/database_cleaner'
 require 'rack_session_access/capybara'
 
 ENV['RAILS_ENV'] ||= 'test'
