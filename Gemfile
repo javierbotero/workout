@@ -40,6 +40,7 @@ end
 
 group :test do
   gem 'database_cleaner-active_record'
+  gem 'rails-controller-testing'
 end
 
 group :development do

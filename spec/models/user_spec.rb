@@ -5,7 +5,16 @@ RSpec.describe User, type: :model do
   let(:ana) { create(:user, username: 'Ana') }
   let(:andres) { create(:user, username: 'Andres') }
   let(:hiking) { create(:article, title: 'Hiking as Workout', author_id: javier.id) }
-  let(:home) { create(:article, author_id: ana.id) }
+  let(:home) do
+    create(:article,
+           author_id: ana.id,
+           text: 'Without micro-resource-constrained performance,
+                  you will lack research and development. Without niches,
+                  you will lack affiliate-based compliance. Without development,
+                  you will lack affiliate-based compliance. What does the commonly-accepted
+                  commonly-accepted standard industry term Quick: do you have a infinitely
+                  reconfigurable scheme for coping with')
+  end
 
   before(:example) do
     create(:friendship, user_id: javier.id, friend_id: ana.id)
@@ -61,6 +70,28 @@ RSpec.describe User, type: :model do
 
     it 'Show ids of articles that were voted by Javier' do
       expect(javier.votes.map(&:article_id)).to eql([hiking.id, home.id])
+    end
+  end
+
+  describe 'validations' do
+    let(:bad_user) { build(:user, username: '') }
+    let(:javier2) { build(:user) }
+
+    it "shows invalid 'bad_user'" do
+      bad_user.valid?
+      expect(bad_user.errors.full_messages).to eql(["Username can't be blank",
+                                                    'Username is too short (minimum is 1 character)'])
+    end
+
+    it 'shows javier2 name as repeated' do
+      javier2.valid?
+      expect(javier2.errors.full_messages).to eql(['Username has already been taken'])
+    end
+  end
+
+  describe '#articles' do
+    it "shows the first Javier's article" do
+      expect(javier.articles.first).to eql(hiking)
     end
   end
 end
