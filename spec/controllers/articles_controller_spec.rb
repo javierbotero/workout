@@ -39,7 +39,7 @@ RSpec.describe ArticlesController, type: :controller do
       expect(assigns(:article).title).to eql('Hiking Workout')
     end
 
-    it 'redirects to show article page' do
+    it 'Checks db for article las created' do
       expect(Article.last.title).to eql('Hiking Workout')
     end
 

@@ -1,0 +1,7 @@
+<%= @category.name %>
+<% @articles.articles.sort_by_date.each do |article| %>
+  <%= cl_image_tag(article.main) %>
+  <%= article.title %>
+  <%= article.text %>
+<% end %>
+

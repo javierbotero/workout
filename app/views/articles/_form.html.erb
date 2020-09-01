@@ -1,0 +1,23 @@
+<%= form_with model: article, local: true do |article| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= article.label 'Title', :title %><br>
+  <%= article.text_field :title %><br>
+  <%= article.label 'Add main image', :main %><br>
+  <%= article.file_field :main, direct_upload: true %><br>
+  <%= article.label 'Text', :text %><br>
+  <%= article.text_field :text %><br>
+  <%= article.label 'Add more images', :photos, direct_upload: true %><br>
+  <%= article.file_field :photos %><br>
+  <%= article.hidden_field :article, :user_id, value: @current_user.id %><br>
+  <%= article.submit 'Submit' %>
+<% end %>

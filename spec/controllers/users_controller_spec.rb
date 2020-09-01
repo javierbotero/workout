@@ -10,7 +10,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'POST #create' do
     before(:example) do
-      post :create, params: { username: 'Javier' }
+      post :create, params: { user: { username: 'Javier' } }
     end
 
     it 'checks the session[user_id] is populated with javier.id' do
@@ -23,13 +23,13 @@ RSpec.describe UsersController, type: :controller do
 
     it 'renders new template when no username is given' do
       session[:user_id] = nil
-      post :create, params: { username: '' }
+      post :create, params: { user: { username: '' } }
       expect(response).to render_template('new')
     end
 
     it 'renders new template when username is repeated' do
       session[:user_id] = nil
-      post :create, params: { username: 'Javier' }
+      post :create, params: { user: { username: 'Javier' } }
       expect(response).to render_template(:new)
     end
 

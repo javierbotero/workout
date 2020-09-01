@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    redirect_to loggin_path unless current_user
+    redirect_to form_loggin_path unless current_user
   end
 end
 
