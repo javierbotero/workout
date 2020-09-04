@@ -105,7 +105,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'After deletint Javier record redirects to root_path' do
-      delete :destroy, params: { id: javier.id } if User.find(javier.id)
+      delete :destroy if User.find(javier.id)
       expect(response).to redirect_to(root_path)
     end
   end

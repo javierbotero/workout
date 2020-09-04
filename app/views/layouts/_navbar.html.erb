@@ -1,0 +1,14 @@
+<nav class="d-sm-flex justify-content-between bg-light w-100 h-navbar py-2 px-3 align-items-center font-footer">
+  <%= link_to root_path, class: "d-flex flex-column justify-content-center align-self-center text-decoration-none pr-2 background-app border-left border-right px-1 border-secondary" do %>
+    <span class="text-white">Work</span>
+    <hr class="text-light align-self-center w-100 m-0">
+    <span class="text-color-orange font-weight-bold">OUT</span>
+  <% end %>
+  <div>
+    <%= link_to('Write an Article', new_article_path, class: 'text-decoration-none color-app text-uppercase font-navbar pr-3') %>
+    <%= link_to('Your Place', user_path(@current_user.id), class: 'text-decoration-none color-app text-uppercase font-navbar') %>
+  </div>
+  <div>
+    <%= display_links(@current_user) %>
+  </div>
+</nav>

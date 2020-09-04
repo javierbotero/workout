@@ -11,9 +11,9 @@ RSpec.describe LogginsController, type: :controller do
       expect(session[:user_id]).to eql(javier.id)
     end
 
-    it 'render user#new if user does not exist' do
+    it 'redirect to users#new if user does not exist' do
       get :loggin, params: { username: 'No name' }
-      expect(response).to render_template('users/new')
+      expect(response).to redirect_to(new_user_path)
     end
 
     it "redirect_to user_path if there's a current_user" do

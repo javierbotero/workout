@@ -39,20 +39,21 @@ RSpec.describe ArticlesController, type: :controller do
       expect(assigns(:article).title).to eql('Hiking Workout')
     end
 
-    it 'Checks db for article las created' do
+    it 'Checks db for article has created' do
       expect(Article.last.title).to eql('Hiking Workout')
     end
+  end
 
-    it "renders 'new' template when the params doesn't have user_id" do
-      post :create, params: {
-        article: {
-          title: 'Some title',
-          text: "Lorem Ipsum is simply dummy text
-          of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's"
-        }
+  it "renders 'new' template when the params doesn't have user_id" do
+    session[:user_id] = nil
+    post :create, params: {
+      article: {
+        title: 'Some title',
+        text: "Lorem Ipsum is simply dummy text
+        of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's"
       }
-      expect(response).to render_template('new')
-    end
+    }
+    expect(response).to redirect_to(form_loggin_path)
   end
 end

@@ -11,9 +11,10 @@
   </head>
 
   <body>
-    <nav class="position-absolute bg-light w-100"><%= link_to 'Home', root_path %> | <%= display_links(@current_user) %></nav>
+    <%= display_navbar(@category) %>
     <%= flash[:notice] %>
     <%= flash[:alert] %>
     <%= yield %>
+    <%= display_footer(@category) %>
   </body>
 </html>

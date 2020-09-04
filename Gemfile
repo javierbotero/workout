@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'cloudinary'
+gem "font-awesome-rails"
 gem 'jquery-rails'
 gem 'rails_12factor', group: :production
 gem 'sprockets-rails', '~> 3.2'

@@ -8,22 +8,42 @@ module ApplicationHelper
     end
   end
 
-  def custom_navbar(confirmation)
-    confirmation ? 'no-nav' : 'yes-nav'
-  end
-
   def display_links(current_user)
     if current_user
       content_tag :div, class: 'greeting' do
-        link_to('Write an Article', new_article_path) << ' | ' <<
-          link_to('Log out', logout_path) << ' | ' \
-          "Hello #{@current_user.username}"
+        link_to("Hello #{@current_user.username}",
+                user_path(current_user),
+                class: 'text-decoration-none text-color-orange text-uppercase font-navbar') << ' | ' <<
+          link_to('Log out', logout_path, class: 'text-decoration-none color-app text-uppercase font-navbar')
       end
     else
       content_tag :div, class: 'greeting' do
-        link_to('Log in', form_loggin_path) << ' | ' <<
-          link_to('Register', new_user_path)
+        link_to('Log in',
+                form_loggin_path,
+                class: 'text-decoration-none color-app text-uppercase font-navbar') << ' | ' <<
+          link_to('Register', new_user_path, class: 'text-decoration-none color-app text-uppercase font-navbar')
       end
     end
+  end
+
+  def create_categories
+    return if Category.any?
+
+    Category.create(name: 'Indoors', priority: 1)
+    Category.create(name: 'Outdoors', priority: 2)
+    Category.create(name: 'Alone', priority: 3)
+    Category.create(name: 'Group', priority: 4)
+  end
+
+  def display_navbar(category)
+    return if category
+
+    render 'layouts/navbar'
+  end
+
+  def display_footer(category)
+    return unless category
+
+    render 'layouts/footer'
   end
 end

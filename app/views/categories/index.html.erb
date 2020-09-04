@@ -1,14 +1,14 @@
-<div class="container-fluid vh-100 p-0">
-  <div class="container-fluid d-flex flex-column-reverse h-75 main-picture" style="background-image: url(<%= asset_path(picture_more_voted) %>);">
+<div class="container-fluid h-index-c p-0">
+  <%= link_to article_path(more_voted_article.id), style: "background-image: url(#{picture_more_voted})", class: 'container-fluid d-flex flex-column-reverse h-75 main-picture add-background' do %>
     <h3 class="order-2"><%= more_voted_article.title %></h3>
-    <p class="order-1"><%= more_voted_article.text[0..20] + '...' %></p>
-  </div>
+    <p class="order-1"><%= more_voted_article.text[0..20] << '...' %></p>
+  <% end %>
   <div class="container-fluid d-flex p-0 h-25">
     <% @categories.each do |category| %>
-      <div class="col-3 bg-primary border add-background">
+      <%= link_to article_id(category.articles, category), style: "background-image: url(#{main_picture(category.articles)})", class: "col-3 bg-primary d-flex flex-column-reverse border add-background" do %>
         <h5><%= article_title(category.articles) %></h5>
-        <p><%= article_text(category.articles)[0..20] + '...' %></p>
-      </div>
+        <p><%= article_text(category.articles)[0..20] << '...' %></p>
+      <% end %>
     <% end %>
   </div>
 </div>

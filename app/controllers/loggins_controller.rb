@@ -1,8 +1,7 @@
 class LogginsController < ApplicationController
   before_action :logged_in?, except: %i[loggin form_loggin]
 
-  def form_loggin
-  end
+  def form_loggin; end
 
   def loggin
     @user = User.find_by(username: params[:username])
@@ -11,8 +10,8 @@ class LogginsController < ApplicationController
       flash[:notice] = 'You logged in succesfully'
       redirect_to root_path, format: :html
     else
-      flash.now[:alert] = 'You have to register before loggin'
-      render 'users/new'
+      flash[:alert] = "You have to register if you don't have an account"
+      redirect_to new_user_path
     end
   end
 

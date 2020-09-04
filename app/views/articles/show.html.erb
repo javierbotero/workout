@@ -1,4 +1,13 @@
-<%= @article.title %>
-<%= cl_image_tag(@article.main) %>
-<%= @article.text %>
-<%= cl_image_tag(@article.photos) %>
+<%= edit_article(@current_user, @article) %>
+<h3><%= @article.title %></h3>
+<span>written by: <%= @article.author.username %></span>
+<%= friendship_invitation(@article.author) %>
+<%= cl_image_tag(@article.main.key, class: "main-image") %>
+<p><%= @article.text %></p>
+<% if @article.photos.attached? %>
+  <div class="d-flex flex-wrap vw-100">
+    <% @article.photos.each do |art| %>
+      <%= image_tag art, class: "images-article w-50 flex-grow-1 align-self-center" %>
+    <% end %>
+  </div>
+<% end %>

@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'Loggin feature', type: :feature do
   let(:javier) { create(:user) }
-  before(:example) { javier }
+  let(:article) { create(:article, author_id: javier.id) }
+
+  before(:example) do
+    javier
+    article
+  end
 
   feature 'Loggin' do
     scenario 'Unregistered user visits root page and is redirected to loggin page' do

@@ -1,0 +1,56 @@
+<% if @current_user == @user %>
+  <div class="">
+    <h4>Friendship requests</h4>
+    <% if @current_user.requests.any? %>
+      <% @current_user.requests.includes(:user) do |request| %>
+        <li>
+          <%= link_to request.user.username,
+                      user_path(request.user.id),
+                      method: :get,
+                      style: "background-image: url(#{display_avatar(request.user)});",
+                      class: 'w-20 h-20' %>
+          <%= link_to 'Accept', friendship_confirm_path(friend_id: request.user.id, friendship_id: request.id) %>
+          <%= link_to 'Deny', friendship_denied_path(friendship_id: request.id) %>
+        </li>
+      <% end %>
+    <% else %>
+      <p>No requests</p>
+    <% end %>
+  <div>
+  <div class="">
+    <h4>Friendship pendings</h4>
+    <% if @current_user.pendings.any? %>
+      <div>
+        <% @current_user.pendings.includes(:friend).each do |pending| %>
+          <div>
+            <p><%= pending.friend.username %></p>
+            <%= link_to '', user_path(pending.friend_id), class: "user-avatar", style: "background-image: url(#{display_avatar(pending.user)})" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No pendings</p>
+    <% end %>
+  </div>
+<% end %>
+<h3>Articles written by: <%= @user.username %></h3>
+<div class="w-75 avatar-big add-background" style="background-image: url(<%= display_avatar(@user) %>)">
+</div>
+<div class="d-flex flex-wrap w-100">
+  <% if @user.articles.any? %>
+    <% @user.articles.each do |art| %>
+      <div class="w-50 d-flex px-1 pb-2">
+        <div class="w-50 add-background" style="background-image: url(<%= main_background(art) %>)">
+        </div>
+        <div class="w-50 pl-2">
+          <h5><%= art.title %></h5>
+          <p><%= art.text[0..50] %>...</p>
+          <%= edit_article(@current_user, art) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+

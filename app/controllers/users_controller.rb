@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in?, except: %i[new create]
   before_action :avoid_duplicates_user, only: %i[new create]
+  before_action :check_friendship, only: :show
 
   def new
     @user = User.new
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:articles).find(params[:id])
   end
 
   def edit
@@ -38,10 +39,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @current_user.destroy
+    session[:user_id] = nil
     flash[:alert] = "#{@user.username} was deleted"
     @user.destroy
-    redirect_to root_path
+    redirect_to loggin_path
   end
 
   private
