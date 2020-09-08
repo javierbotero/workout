@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'categories#index'
-  resources :users, except: :index
+  resources :users
   resources :articles, except: :index
   resources :categories, only: %i[index show]
   resources :votes, only: %i[create destroy]
@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get '/form_loggin', to: 'loggins#form_loggin'
   post '/loggin', to: 'loggins#loggin'
   get '/logout', to: 'loggins#logout'
+  post '/photos/destroy', to: 'photos#destroy'
 end

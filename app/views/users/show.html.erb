@@ -1,56 +1,47 @@
 <% if @current_user == @user %>
-  <div class="">
-    <h4>Friendship requests</h4>
-    <% if @current_user.requests.any? %>
-      <% @current_user.requests.includes(:user) do |request| %>
-        <li>
-          <%= link_to request.user.username,
-                      user_path(request.user.id),
-                      method: :get,
-                      style: "background-image: url(#{display_avatar(request.user)});",
-                      class: 'w-20 h-20' %>
-          <%= link_to 'Accept', friendship_confirm_path(friend_id: request.user.id, friendship_id: request.id) %>
-          <%= link_to 'Deny', friendship_denied_path(friendship_id: request.id) %>
-        </li>
-      <% end %>
-    <% else %>
-      <p>No requests</p>
-    <% end %>
-  <div>
-  <div class="">
-    <h4>Friendship pendings</h4>
-    <% if @current_user.pendings.any? %>
-      <div>
-        <% @current_user.pendings.includes(:friend).each do |pending| %>
-          <div>
-            <p><%= pending.friend.username %></p>
-            <%= link_to '', user_path(pending.friend_id), class: "user-avatar", style: "background-image: url(#{display_avatar(pending.user)})" %>
+<div class="p-3">
+  <h4 class="text-white">Friendship requests</h4>
+    <div class="d-sm-flex flex-wrap align-content-start">
+      <% if @current_user.requests.any? %>
+        <% @current_user.requests.includes(:user).each do |request| %>
+          <div class="p-2 text-center border rounded m-1">
+            <%= link_to '',
+                        user_path(request.user.id),
+                        method: :get,
+                        style: "background-image: url(#{display_avatar(request.user)});",
+                        class: 'user-avatar mx-auto' %>
+            <p class="text-white"><%= request.user.username %></p>
+            <%= link_to 'Accept', friendship_confirm_path(friend_id: request.user.id, friendship_id: request.id), method: :post, class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1' %>
+            <%= link_to 'Deny', friendship_denied_path(friendship_id: request.id), method: :post, class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1' %>
           </div>
         <% end %>
-      </div>
-    <% else %>
-      <p>No pendings</p>
+      <% else %>
+        <p>No requests</p>
+      <% end %>
+    </div>
+  <h4 class="text-white">Friendship pendings</h4>
+    <div class="d-sm-flex flex-wrap align-content-start">
+      <% if @current_user.pendings.any? %>
+          <% @current_user.pendings.includes(:friend).each do |pending| %>
+            <div class="p-2 text-center border rounded m-1">
+              <%= link_to '', user_path(pending.friend_id), class: "user-avatar", style: "background-image: url(#{display_avatar(pending.user)})" %>
+              <p class="text-white"><%= pending.friend.username %></p>
+            </div>
+          <% end %>
+      <% else %>
+        <p>No pendings</p>
+      <% end %>
+    </div>
+  <% end %>
+  <h5 class="text-decoration-none bg-color-orange w-75 py-3 mx-auto rounded text-center"><%= link_to 'Add Authors', users_path, class: 'text-decoration-none text-white' %></h5>
+  <h3 class="text-white">Articles written by: <%= @user.username %></h3>
+  <div class="w-90 avatar-big add-background rounded my-4" style="background-image: url(<%= display_avatar(@user) %>)">
+  </div>
+  <div class="d-sm-flex flex-wrap w-100 align-content-start">
+    <% if @user.articles.any? %>
+      <%= render 'articles', user: @user %>
     <% end %>
   </div>
-<% end %>
-<h3>Articles written by: <%= @user.username %></h3>
-<div class="w-75 avatar-big add-background" style="background-image: url(<%= display_avatar(@user) %>)">
 </div>
-<div class="d-flex flex-wrap w-100">
-  <% if @user.articles.any? %>
-    <% @user.articles.each do |art| %>
-      <div class="w-50 d-flex px-1 pb-2">
-        <div class="w-50 add-background" style="background-image: url(<%= main_background(art) %>)">
-        </div>
-        <div class="w-50 pl-2">
-          <h5><%= art.title %></h5>
-          <p><%= art.text[0..50] %>...</p>
-          <%= edit_article(@current_user, art) %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
 
 

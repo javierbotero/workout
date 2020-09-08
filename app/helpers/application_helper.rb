@@ -2,9 +2,13 @@ module ApplicationHelper
   def vote_decision(user_id, article)
     if article.voter_ids.include?(user_id)
       vote = Vote.where(user_id: user_id, article_id: article.id).first
-      button_to('Delete Vote', vote_path(vote.id), method: :delete)
+      link_to(vote_path(vote.id), method: :delete) do
+        fa_icon 's heart', class: 'text-danger'
+      end
     else
-      button_to('Vote', votes_path, method: :post, params: { article_id: hiking.id, user_id: javier.id })
+      link_to(votes_path(article_id: article.id, user_id: user_id), method: :post) do
+        fa_icon 's heart', class: 'text-secondary'
+      end
     end
   end
 
@@ -12,7 +16,7 @@ module ApplicationHelper
     if current_user
       content_tag :div, class: 'greeting' do
         link_to("Hello #{@current_user.username}",
-                user_path(current_user),
+                user_path(@current_user),
                 class: 'text-decoration-none text-color-orange text-uppercase font-navbar') << ' | ' <<
           link_to('Log out', logout_path, class: 'text-decoration-none color-app text-uppercase font-navbar')
       end
@@ -45,5 +49,16 @@ module ApplicationHelper
     return unless category
 
     render 'layouts/footer'
+  end
+
+  def display_middle_links(current_user)
+    return unless current_user
+
+    link_to('Write an Article',
+            new_article_path,
+            class: 'text-decoration-none color-app text-uppercase font-navbar pr-3') << '  ' <<
+      link_to('Your Place',
+              user_path(@current_user.id),
+              class: 'text-decoration-none color-app text-uppercase font-navbar')
   end
 end

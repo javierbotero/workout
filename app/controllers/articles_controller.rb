@@ -8,9 +8,8 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params_article)
     if @article.save
-      params[:article][:categories].each do |catg|
-        @article.categories << Category.find(catg)
-      end
+      @article.category_ids = params[:categories]
+      @article.photos.attach(params[:article][:photos])
       flash[:notice] = "You have created the article #{@article.title}"
       redirect_to article_path(@article)
     else
@@ -30,9 +29,8 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update(params_article)
-      params[:categories].each do |catg|
-        @article.categories << Category.find(catg) unless @article.category_ids.include?(catg)
-      end
+      @article.category_ids = params[:categories]
+      @article.photos.attach(params[:article][:photos]) if params[:article][:photos]
       flash[:notice] = 'Article succesfully saved'
       redirect_to article_path(@article)
     else
@@ -52,7 +50,7 @@ class ArticlesController < ApplicationController
 
   def params_article
     params.require(:article)
-      .permit(:title, :text, :author_id, :main, photos: [])
+      .permit(:title, :text, :author_id, :main)
       .with_defaults(author_id: @current_user.id)
   end
 end

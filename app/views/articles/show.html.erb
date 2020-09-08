@@ -1,11 +1,18 @@
-<%= edit_article(@current_user, @article) %>
-<h3><%= @article.title %></h3>
-<span>written by: <%= @article.author.username %></span>
-<%= friendship_invitation(@article.author) %>
-<%= cl_image_tag(@article.main.key, class: "main-image") %>
-<p><%= @article.text %></p>
+<%= link_edit_article(@current_user, @article) %>
+<h3 class="text-white text-center py-3"><%= @article.title %></h3>
+<div class="text-light d-sm-flex justify-content-between py-3">
+  <span>written by: <%= @article.author.username %></span>
+  <span>Categories: <% @article.categories.map(&:name).each do |name| %>
+    <%= "#{name} | "%>
+  <% end %>
+  </span>
+  <%= vote_decision(@current_user.id, @article) %>
+  <%= friendship_invitation(@article.author) %>
+</div>
+<%= cl_image_tag(@article.main.key, class: 'w-100 d-block mx-auto rounded') if @article.main.attached?%>
+<p class="text-white py-4"><%= @article.text %></p>
 <% if @article.photos.attached? %>
-  <div class="d-flex flex-wrap vw-100">
+  <div class="d-flex flex-wrap w-100">
     <% @article.photos.each do |art| %>
       <%= image_tag art, class: "images-article w-50 flex-grow-1 align-self-center" %>
     <% end %>

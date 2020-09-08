@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :avoid_duplicates_user, only: %i[new create]
   before_action :check_friendship, only: :show
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end

@@ -32,9 +32,10 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'displays the links to Logout and Write an Article if current user' do
       code = proc do
         content_tag :div, class: 'greeting' do
-          link_to('Write an Article', new_article_path) << ' | ' <<
-            link_to('Log out', logout_path) << ' | ' \
-            "Hello #{@current_user.username}"
+          link_to("Hello #{@current_user.username}",
+                  user_path(@current_user),
+                  class: 'text-decoration-none text-color-orange text-uppercase font-navbar') << ' | ' <<
+            link_to('Log out', logout_path, class: 'text-decoration-none color-app text-uppercase font-navbar')
         end
       end
       expect(display_links(@current_user)).to eql(code.call)
@@ -43,20 +44,12 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'displays the links of logging and register if no current_user' do
       some_var = nil
       code = content_tag :div, class: 'greeting' do
-        link_to('Log in', form_loggin_path) << ' | ' <<
-          link_to('Register', new_user_path)
+        link_to('Log in',
+                form_loggin_path,
+                class: 'text-decoration-none color-app text-uppercase font-navbar') << ' | ' <<
+          link_to('Register', new_user_path, class: 'text-decoration-none color-app text-uppercase font-navbar')
       end
       expect(display_links(some_var)).to eql(code)
-    end
-  end
-
-  describe '#custom_navbar' do
-    it "returns string 'no-nav' if current_page is articles#show" do
-      expect(custom_navbar(true)).to eql('no-nav')
-    end
-
-    it "returns the html 'yes-nav' if it isn't the articles#show" do
-      expect(custom_navbar(false)).to eql('yes-nav')
     end
   end
 end

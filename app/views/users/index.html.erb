@@ -1,0 +1,14 @@
+<h4>Authors:</h4>
+<div class="d-sm-flex flex-wrap p-2">
+  <% @users.each do |user| %>
+    <% next if user == @current_user %>
+    <div class="vw-30 vh-25 p-2">
+      <%= link_to '',
+                  user_path(user),
+                  method: :get,
+                  class: 'user-avatar',
+                  style: "background-image: url(#{display_avatar(user)}" %>
+      <%= friendship_invitation(user) %>
+    </div>
+  <% end %>
+</div>

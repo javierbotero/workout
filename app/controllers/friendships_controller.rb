@@ -2,30 +2,32 @@ class FriendshipsController < ApplicationController
   before_action :logged_in?
 
   def create
-    friendship = Friendship.new(user_id: @current_user.id, friend_id: params[:friend_id])
-    return unless friendship.save
-
-    flash[:notice] = 'Wait for friendship confirmation'
-    redirect_to user_path(@current_user.id)
+    friendship = Friendship.find_by(user_id: @current_user.id, friend_id: params[:friend_id])
+    if friendship
+      flash[:alert] = friendship.confirmed ? 'You are friend already' : 'This friendship is pending'
+    else
+      Friendship.create(user_id: @current_user.id, friend_id: params[:friend_id], confirmed: false)
+      flash[:notice] = 'Wait for friendship confirmation'
+    end
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def confirm
     friendship = Friendship.find(params[:friendship_id])
-    friendship.confirmed = true
+    friendship.update(confirmed: true)
     if Friendship.create(user_id: @current_user.id, friend_id: params[:friend_id], confirmed: true)
       flash[:notice] = 'You have confirmed this friendships'
-      redirect_to user_path(@current_user)
     else
       flash[:alert] = 'Something wrong happened'
-      redirect_to root_path
     end
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def denied
     friendship = Friendship.find(params[:friendship_id])
     friendship.destroy
     flash[:notice] = 'You denied this request'
-    redirect_to user_path(@current_user)
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def delete_friendship
@@ -36,6 +38,6 @@ class FriendshipsController < ApplicationController
     record1.destroy
     record2.destroy
     flash[:notice] = 'You have deleted this friendship'
-    redirect_to root_path
+    redirect_to request.env['HTTP_REFERER']
   end
 end

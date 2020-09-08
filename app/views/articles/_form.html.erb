@@ -1,17 +1,27 @@
 <%= form_with model: article, local: true, class: 'd-flex flex-column justify-content-center p-5' do |article| %>
-  <%= article.label 'Title', :title %><br>
+  <%= article.label :title, 'Title' %><br>
   <%= article.text_field :title %><br>
-  <%= article.label 'Add main image', :main %><br>
+  <%= article.label :main, 'Main image' %><br>
   <%= article.file_field :main, direct_upload: true %><br>
-  <%= article.label 'Text', :text %><br>
-  <%= article.text_field :text %><br>
-  <%= article.label 'Add more images', :photos %><br>
+  <%= check_main_picture(@article) %>
+  <%= cl_image_tag @article.main.key, class: 'w-50 h-50' if @article.main.attached? %>
+  <%= article.label :text, 'Write your article' %><br>
+  <%= article.text_area :text, rows: 30, class: 'w-100' %><br>
+  <%= article.label :photos, 'Add more images if necessary' %><br>
   <%= article.file_field :photos, multiple: true, direct_upload: true %><br>
+  <% if @article.photos.attached? %>
+  <div class="d-flex flex-wrap vw-100">
+      <% @article.photos.each do |pic| %>
+        <%= image_tag pic, class: "images-article w-25 flex-grow-1 align-self-center" %>
+        <%= link_to 'Delete picture', photos_destroy_path(article_id: @article.id, pic_id: pic.id), method: :post %>
+      <% end %>
+    </div>
+  <% end %>
   <%= label_tag 'category', 'Choose one or many categories', class: 'py-2' %><br>
 
   <% Category.all.each do |catg| %>
     <%= label_tag 'categories', catg.name %>
-    <%= check_box_tag 'categories[]', catg.id %><br>
+    <%= checked?(@article, catg) %><br>
   <% end %>
 
   <%= article.submit 'Submit' %>

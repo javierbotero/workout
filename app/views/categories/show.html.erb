@@ -1,17 +1,6 @@
-<div class="h-show-c">
+<div class="h-show-c d-sm-flex flex-wrap">
   <% if @category.articles.any? %>
-    <% sort_by_date(@category.articles).each do |article| %>
-      <div class="w-50 d-flex px-1 pb-2 bg-light">
-        <div class="w-50 add-background" style="background-image: url(<%= main_background(article) %>)">
-        </div>
-        <div class="w-50 pl-2">
-          <h5 class="text-color-orange font-weight-bold"><%= @category.name %></h5>
-          <p class="font-weight-bold"><%= article.title %></p>
-          <p><%= article.text[0..50] %>...</p>
-          <%= edit_article(@current_user, article) %>
-        </div>
-      </div>
-    <% end %>
+    <%= render @category %>
   <% else %>
     <p class="h-100 background-app text-light">No articles written lately, you can write one if you feel inspirated :)</p>
   <% end %>

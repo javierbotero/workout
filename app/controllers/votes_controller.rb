@@ -5,7 +5,7 @@ class VotesController < ApplicationController
     vote = Vote.new(user_id: params[:user_id], article_id: params[:article_id])
     if vote.save
       flash[:notice] = 'You voted succesfully'
-      redirect_to article_path(params[:article_id])
+      redirect_to request.env['HTTP_REFERER']
     else
       flash[:alert] = 'Something went wrong notify us through our mail service'
       redirect_to root_path
@@ -16,6 +16,6 @@ class VotesController < ApplicationController
     vote = Vote.find(params[:id])
     vote.destroy
     flash[:notice] = 'Your vote was deleted'
-    redirect_to root_path
+    redirect_to request.env['HTTP_REFERER']
   end
 end
