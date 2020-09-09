@@ -96,17 +96,4 @@ RSpec.describe UsersController, type: :controller do
       expect(User.find(javier.id).username).to eql('Javier New')
     end
   end
-
-  describe 'DELETE #destroy' do
-    let(:javier) { create(:user) }
-
-    before(:example) do
-      session[:user_id] = javier.id
-    end
-
-    it 'After deletint Javier record redirects to root_path' do
-      delete :destroy if User.find(javier.id)
-      expect(response).to redirect_to(root_path)
-    end
-  end
 end

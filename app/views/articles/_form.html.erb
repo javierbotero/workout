@@ -3,17 +3,15 @@
   <%= article.text_field :title %><br>
   <%= article.label :main, 'Main image' %><br>
   <%= article.file_field :main, direct_upload: true %><br>
-  <%= check_main_picture(@article) %>
   <%= cl_image_tag @article.main.key, class: 'w-50 h-50' if @article.main.attached? %>
   <%= article.label :text, 'Write your article' %><br>
   <%= article.text_area :text, rows: 30, class: 'w-100' %><br>
   <%= article.label :photos, 'Add more images if necessary' %><br>
   <%= article.file_field :photos, multiple: true, direct_upload: true %><br>
   <% if @article.photos.attached? %>
-  <div class="d-flex flex-wrap vw-100">
+  <div class="d-flex flex-wrap w-100">
       <% @article.photos.each do |pic| %>
-        <%= image_tag pic, class: "images-article w-25 flex-grow-1 align-self-center" %>
-        <%= link_to 'Delete picture', photos_destroy_path(article_id: @article.id, pic_id: pic.id), method: :post %>
+        <%= image_tag pic, class: "images-article w-25 align-self-center" %>
       <% end %>
     </div>
   <% end %>

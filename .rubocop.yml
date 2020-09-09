@@ -6,6 +6,8 @@ AllCops:
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
 
   DisplayCopNames: true
 

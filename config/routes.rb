@@ -12,4 +12,9 @@ Rails.application.routes.draw do
   post '/loggin', to: 'loggins#loggin'
   get '/logout', to: 'loggins#logout'
   post '/photos/destroy', to: 'photos#destroy'
+  post '/user/avatar/destroy', to: 'photos#avatar_destroy'
+  patch '/user/avatar/update', to: 'photos#update_avatar'
+  delete '/article/main/delete', to: 'photos#destroy_main'
+  patch '/article/main/update', to: 'photos#update_main'
+  patch '/article/photos/update', to: 'photos#photos_update'
 end

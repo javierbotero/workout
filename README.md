@@ -1,24 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Members - Only**
 
-Things you may want to cover:
+This project was built for the Ruby on Rails capstone based on lifestyle articles website template. In this webapp, the users can write articles about exercise or workout individually, in groups, indoors, or outdoors. The main features of this app are:
 
-* Ruby version
+- The user can logs in to the app, only by typing the username.
+- The user is presented with the homepage.
+- Featured article with full-width image and title in the first row. This is an article with the biggest number of votes.
+- List of all categories in order of priority. Each category should be displayed as a square with its name on the top and its most recent article's title in the bottom.
+When the user clicks the category name they can see all articles in that category and write an article.
 
-* System dependencies
+## Built With
 
-* Configuration
+- Rails 6.0.3.2
+- Ruby 2.6.4p104
+- Bootstrap
+- rspec
+- cloudinary
 
-* Database creation
+## Authors
 
-* Database initialization
+👤 **Javier Botero**
 
-* How to run the test suite
+- Github: [@Javierbotero](https://github.com/javierbotero)
+- Twitter: [@Javierbotero1](https://twitter.com/JavierBotero1)
+- Linkedin: [Javierbotero](https://www.linkedin.com/in/javier-botero-044686155/)
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## 🤝 Contributing
 
-* ...
+Contributions, issues and feature requests are welcome!
+
+## Show your support
+
+Give a ⭐️ if you like this project!

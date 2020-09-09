@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(username: params[:user][:username])
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'Your account was created'
@@ -57,5 +57,9 @@ class UsersController < ApplicationController
 
     flash[:alert] = "You don't need more than one account"
     redirect_to root_path
+  end
+
+  def user_params
+    params.require(:user).permit(:username, :avatar)
   end
 end

@@ -6,8 +6,10 @@ module ArticleHelper
   def main_picture(collection)
     if collection.empty?
       asset_path('workout1.jpg')
-    else
+    elsif sort_by_date(collection).first.main.attached?
       cloudinary_url(sort_by_date(collection).first.main.key)
+    else
+      asset_path('workout1.jpg')
     end
   end
 
@@ -88,24 +90,8 @@ module ArticleHelper
   end
 
   def check_main_picture(article)
-    return unless article.main.attached?
+    return unless article.main.attached? || @current_user == article.author
 
     link_to 'Delete the main picture', photos_destroy_path(article_id: article.id), method: :post
-  end
-
-  def checked?(article, category)
-    if article.category_ids.include?(category.id)
-      check_box_tag 'categories[]', category.id, true
-    else
-      check_box_tag 'categories[]', category.id
-    end
-  end
-
-  def link_edit_article(current_user, article)
-    return unless current_user == article.author
-
-    link_to 'Edit the article',
-            edit_article_path(article.id),
-            class: 'text-color-orange border d-block w-50 p-3 mt-3 mx-auto text-center text-decoration-none'
   end
 end

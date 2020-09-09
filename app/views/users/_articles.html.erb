@@ -5,9 +5,9 @@ sort_by_date(user.articles).each do |article| %>
    <div class="w-50 add-background<%= switcher ? ' order-1' : ' order-2' %>" style="background-image: url(<%= main_background(article) %>)">
    </div>
    <div class="w-50 p-2 d-flex flex-column justify-content-between<%= switcher ? ' order-2' : ' order-1' %>">
-     <p class="font-weight-bold"><%= article.title %></p>
+     <p class="font-weight-bold text-body"><%= article.title %></p>
      <%= vote_decision(@current_user.id, article) %>
-     <p class="text-truncate"><%= article.text[0..50] %>...</p>
+     <p class="text-truncate text-dark"><%= article.text[0..50] %>...</p>
      <%= edit_article(@current_user, article) %>
      <% i += 1
         if i > 1
