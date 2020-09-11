@@ -1,8 +1,8 @@
 # README
 
-**Members - Only**
+**WorkOut**
 
-This project was built for the Ruby on Rails capstone based on lifestyle articles website template. In this webapp, the users can write articles about exercise or workout individually, in groups, indoors, or outdoors. The main features of this app are:
+This project was built for the Microverse Ruby on Rails capstone project based on lifestyle articles website template. In this webapp, the users can write articles about exercise or workout individually, in groups, indoors, or outdoors. The main features of this app are:
 
 - The user can logs in to the app, only by typing the username.
 - The user is presented with the homepage.
@@ -18,6 +18,23 @@ When the user clicks the category name they can see all articles in that categor
 - rspec
 - cloudinary
 
+## Getting start
+
+In order to start with the project:
+
+1. You need to have Rails environment installed.
+2. Fork this repository.
+3. Check your Ruby and Rails version should be corresponding to project version, if not run these command to
+    - gem install bundler
+    - rbenv rehash
+    - gem install rails
+    - rbenv rehash
+
+4. Run the migration to database
+    - rails db:migrate
+5. Run the rails server
+    - rails server
+
 ## Authors
 
 👤 **Javier Botero**
@@ -26,6 +43,9 @@ When the user clicks the category name they can see all articles in that categor
 - Twitter: [@Javierbotero1](https://twitter.com/JavierBotero1)
 - Linkedin: [Javierbotero](https://www.linkedin.com/in/javier-botero-044686155/)
 
+## Referents
+
+This project was based on the design idea by [Nelson Sakwa on Behance](https://www.behance.net/sakwadesignstudio)
 
 ## 🤝 Contributing
 
