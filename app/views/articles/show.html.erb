@@ -16,7 +16,7 @@
   <div class="d-flex flex-wrap w-100">
     <% @article.photos.each do |art| %>
       <%= image_tag art, class: "images-article w-50 flex-grow-1 align-self-center" %><br>
-      <%= link_to('delete', photos_destroy_path(article_id: @article.id, pic_id: art.id), method: :post, class: 'block w-50 text-center my-auto') if @article.author == @current_user %>
+      <%= display_delete_link(@article) %>
     <% end %>
   </div>
 <% end %>

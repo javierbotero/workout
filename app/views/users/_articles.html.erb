@@ -1,7 +1,7 @@
 <% i = 0
 switcher = true
 sort_by_date(user.articles).each do |article| %>
- <div class="w-50 d-flex bg-light">
+ <div class="col-sm-6 p-0 d-flex bg-light">
    <div class="w-50 add-background<%= switcher ? ' order-1' : ' order-2' %>" style="background-image: url(<%= main_background(article) %>)">
    </div>
    <div class="w-50 p-2 d-flex flex-column justify-content-between<%= switcher ? ' order-2' : ' order-1' %>">

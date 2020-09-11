@@ -42,4 +42,12 @@ module ArticleExtendHelper
         f.submit('Upload', class: 'w-50')
     end
   end
+
+  def display_delete_link(article)
+    return unless article.author == @current_user
+
+    link_to('delete',
+            photos_destroy_path(article_id: @article.id, pic_id: art.id),
+            method: :post, class: 'block w-50 text-center my-auto')
+  end
 end

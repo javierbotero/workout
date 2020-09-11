@@ -1,8 +1,4 @@
-<div class="h-show-c d-sm-flex flex-wrap text-dark vh-89">
-  <% if @category.articles.any? %>
-    <%= render 'articles', articles: @articles %>
-  <% else %>
-    <p class="h-100 background-app text-light">No articles written lately, you can write one if you feel inspirated :)</p>
-  <% end %>
+<div class="h-show-c row flex-wrap text-dark vh-89 m-0">
+  <%= check_category_articles(@articles) %>
 </div>
 

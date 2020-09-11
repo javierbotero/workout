@@ -9,12 +9,12 @@
     <h3 class="order-2 text-color-orange"><%= more_voted_article.title %></h3>
     <p class="order-1 text-white"><%= more_voted_article.text[0..20] << '...' %></p>
   <% end %>
-  <div class="container-fluid d-flex p-0 h-25">
+  <div class="container-fluid d-sm-flex p-0 h-25">
     <% @categories.each do |category| %>
       <%= link_to article_id(category.articles, category),
                   style: "background-image: linear-gradient(to bottom, rgba(0, 0, 0, .7), 20%, transparent, 80%, rgba(0, 0, 0, .7)),
                                             url(#{main_picture(category.articles)})",
-                  class: "col-3 d-flex flex-column align-items-start border border-secondary add-background text-decoration-none text-white p-3" do %>
+                  class: "col-sm-3 d-flex flex-column align-items-start border border-secondary add-background text-decoration-none text-white p-3" do %>
         <h5 class="mb-auto"><u><%= category.name %></u></h5>
         <h5 class=""><%= article_title(category.articles) %></h5>
       <% end %>

@@ -1,9 +1,5 @@
 <footer class="d-sm-flex justify-content-between py-2 px-3 background-app text-light h-footer">
-  <%= link_to root_path, class: "d-flex flex-column justify-content-center align-self-center text-decoration-none pr-2 background-app border-left border-right px-1 border-secondary mr-2" do %>
-    <span class="text-white">Work</span>
-    <hr class="text-light align-self-center w-100 m-0">
-    <span class="text-color-orange font-weight-bold">OUT</span>
-  <% end %>
+  <%= render 'layouts/logo' %>
   <ul class="d-flex list-unstyled align-self-center m-0 font-footer">
     <li class="pr-2"><%= link_to 'Privacy Policy', root_path, class: 'text-decoration-none text-color-orange' %></li>
     <li class="pr-2"><%= link_to 'Terms and Conditions', root_path, class: 'text-decoration-none text-color-orange' %></li>

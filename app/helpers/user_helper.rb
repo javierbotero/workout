@@ -41,4 +41,14 @@ module UserHelper
       end
     end
   end
+
+  def display_avatar_in_form(user)
+    cl_image_tag(user.avatar, class: 'w-100') if user.avatar.attached?
+  end
+
+  def check_user_articles(user)
+    return unless user.articles.any?
+
+    render 'articles', user: @user
+  end
 end

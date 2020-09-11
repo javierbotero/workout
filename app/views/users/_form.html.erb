@@ -3,6 +3,6 @@
   <%= f.text_field :username %><br><br>
   <%= f.label :avatar, 'Upload a picture avatar' %><br>
   <%= f.file_field(:avatar, direct_upload: true, class: 'py-2') unless user.avatar.attached? %>
-  <%= cl_image_tag(user.avatar, class: 'w-100') if user.avatar.attached? %>
+  <%= display_avatar_in_form(user) %>
   <%= f.submit 'Submit' %>
 <% end %>
