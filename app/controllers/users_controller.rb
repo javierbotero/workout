@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :check_friendship, only: :show
 
   def index
-    @users = User.all
+    @users = User.all.includes(:friends, :requests, :pendings)
   end
 
   def new

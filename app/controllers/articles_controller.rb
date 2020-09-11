@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.includes(:author).find(params[:id])
+    @article = Article.includes(:author, :main_attachment, :photos_attachments).find(params[:id])
   end
 
   def edit

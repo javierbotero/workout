@@ -30,15 +30,6 @@ module ApplicationHelper
     end
   end
 
-  def create_categories
-    return if Category.any?
-
-    Category.create(name: 'Indoors', priority: 1)
-    Category.create(name: 'Outdoors', priority: 2)
-    Category.create(name: 'Alone', priority: 3)
-    Category.create(name: 'Group', priority: 4)
-  end
-
   def display_navbar(category)
     return if category
 

@@ -9,6 +9,6 @@ class Article < ApplicationRecord
   has_many_attached :photos
 
   def self.more_voted
-    find_by(votes_count: Article.maximum('votes_count'))
+    includes(:main_attachment).find_by(votes_count: Article.maximum('votes_count'))
   end
 end

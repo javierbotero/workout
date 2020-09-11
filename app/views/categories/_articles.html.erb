@@ -1,11 +1,11 @@
 <% i = 0
 switcher = true
-sort_by_date(category.articles).each do |article| %>
- <div class="w-50 d-flex bg-light">
+sort_by_date(articles).each do |article| %>
+ <div class="w-50 vh-50 d-flex bg-light">
    <div class="w-50 add-background<%= switcher ? ' order-1' : ' order-2' %>" style="background-image: url(<%= main_background(article) %>)">
    </div>
    <div class="w-50 p-2 d-flex flex-column justify-content-between<%= switcher ? ' order-2' : ' order-1' %>">
-     <h5 class="text-color-orange font-weight-bold"><%= category.name %></h5>
+     <h5 class="text-color-orange font-weight-bold"><%= @category.name %></h5>
      <p class="font-weight-bold"><%= article.title %></p>
      <%= vote_decision(@current_user.id, article) %>
      <p><%= article.text[0..100] %>...</p>

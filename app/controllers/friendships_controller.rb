@@ -31,10 +31,10 @@ class FriendshipsController < ApplicationController
   end
 
   def delete_friendship
-    record1 = Friendship.where(user_id: @current_user.id,
-                               friend_id: params[:friend_id]).first
-    record2 = Friendship.where(user_id: params[:friend_id],
-                               friend_id: @current_user.id).first
+    record1 = Friendship.includes(:friend, :user).where(user_id: @current_user.id,
+                                                        friend_id: params[:friend_id]).first
+    record2 = Friendship.includes(:friend, :user).where(user_id: params[:friend_id],
+                                                        friend_id: @current_user.id).first
     record1.destroy
     record2.destroy
     flash[:notice] = 'You have deleted this friendship'
