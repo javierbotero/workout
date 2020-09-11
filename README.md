@@ -10,6 +10,10 @@ This project was built for the Microverse Ruby on Rails capstone project based o
 - List of all categories in order of priority. Each category should be displayed as a square with its name on the top and its most recent article's title in the bottom.
 When the user clicks the category name they can see all articles in that category and write an article.
 
+## Live preview
+
+[WorkOut App](https://stark-harbor-31329.herokuapp.com/)
+
 ## Built With
 
 - Rails 6.0.3.2
