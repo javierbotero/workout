@@ -1,9 +1,9 @@
 module ArticleExtendHelper
   def checked?(article, category)
     if article.category_ids.include?(category.id)
-      check_box_tag 'categories[]', category.id, true
+      check_box_tag('categories[]', category.id, true, class: 'my-2')
     else
-      check_box_tag 'categories[]', category.id
+      check_box_tag('categories[]', category.id, false, class: 'my-2')
     end
   end
 
@@ -31,6 +31,23 @@ module ArticleExtendHelper
     end
   end
 
+  def show_main_picture(article)
+    cl_image_tag(article.main.key, class: 'w-100 d-block mx-auto rounded') if article.main.attached?
+  end
+
+  def display_pictures_with_delete(article)
+    return unless article.photos.attached?
+
+    content_tag(:div, class: 'd-flex flex-wrap w-100') do
+      pictures = ''
+      article.photos.each do |art|
+        pictures << image_tag(art, class: 'images-article w-50 flex-grow-1 align-self-center py-2')
+        pictures << display_delete_link(article, art)
+      end
+      pictures.html_safe
+    end
+  end
+
   def attach_photos(article)
     return unless @current_user == article.author
 
@@ -43,11 +60,37 @@ module ArticleExtendHelper
     end
   end
 
-  def display_delete_link(article)
+  def display_delete_link(article, picture)
     return unless article.author == @current_user
 
     link_to('delete',
-            photos_destroy_path(article_id: @article.id, pic_id: art.id),
+            photos_destroy_path(article_id: article.id, pic_id: picture.id),
             method: :post, class: 'block w-50 text-center my-auto')
+  end
+
+  def display_pictures_article(pictures)
+    return unless pictures.any?
+
+    html = content_tag(:div, class: 'row w-100') do
+      pics = ''
+      pictures.each do |pic|
+        pics << image_tag(pic, class: 'images-article col-sm-6 align-self-center p-2')
+      end
+      pics.html_safe
+    end
+    html.html_safe
+  end
+
+  def main_image_article(article)
+    cl_image_tag article.main.key, class: 'w-50 h-50' if article.main.attached?
+  end
+
+  def display_options_article(article)
+    html = ''
+    Category.all.each do |catg|
+      html << label_tag('categories', catg.name) +
+              checked?(article, catg)
+    end
+    html.html_safe
   end
 end

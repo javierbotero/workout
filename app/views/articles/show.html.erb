@@ -9,16 +9,9 @@
   <%= vote_decision(@current_user.id, @article) %>
   <%= friendship_invitation(@article.author) %>
 </div>
-<%= cl_image_tag(@article.main.key, class: 'w-100 d-block mx-auto rounded') if @article.main.attached? %>
+<%= show_main_picture(@article) %>
 <%= show_main(@article) %>
 <p class="text-white py-4"><%= @article.text[0..(@article.text.length/2)] %></p>
-<% if @article.photos.attached? %>
-  <div class="d-flex flex-wrap w-100">
-    <% @article.photos.each do |art| %>
-      <%= image_tag art, class: "images-article w-50 flex-grow-1 align-self-center" %><br>
-      <%= display_delete_link(@article) %>
-    <% end %>
-  </div>
-<% end %>
+<%= display_pictures_with_delete(@article) %>
 <%= attach_photos(@article) %>
 <p class="text-white py-4"><%= @article.text[(@article.text.length/2)..-1] %></p>

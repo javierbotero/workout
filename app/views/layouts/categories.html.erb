@@ -12,11 +12,7 @@
 
   <body class="background-app text-light">
     <%= display_navbar(@category) %>
-      <% if flash.any? %>
-        <% flash.each do |name, msg| %>
-          <div class="flash w-75 mx-auto rounded d-flex justify-content-center align-items-center m-2 <%= name %>"><%= msg %></div>
-        <% end %>
-      <% end %>
+      <%= display_flahs(flash) %>
       <%= yield %>
     <%= display_footer(@category) %>
   </body>

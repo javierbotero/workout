@@ -1,46 +1,11 @@
-<% if @current_user == @user %>
-<div class="p-3">
-  <h4 class="text-white">Friendship requests</h4>
-    <div class="d-sm-flex flex-wrap align-content-start">
-      <% if @current_user.requests.any? %>
-        <% @current_user.requests.includes(:user).each do |request| %>
-          <div class="p-2 text-center border rounded m-1">
-            <%= link_to '',
-                        user_path(request.user.id),
-                        method: :get,
-                        style: "background-image: url(#{display_avatar(request.user)});",
-                        class: 'user-avatar mx-auto' %>
-            <p class="text-white"><%= request.user.username %></p>
-            <%= link_to 'Accept', friendship_confirm_path(friend_id: request.user.id, friendship_id: request.id), method: :post, class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1' %>
-            <%= link_to 'Deny', friendship_denied_path(friendship_id: request.id), method: :post, class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1' %>
-          </div>
-        <% end %>
-      <% else %>
-        <p>No requests</p>
-      <% end %>
-    </div>
-  <h4 class="text-white">Friendship pendings</h4>
-    <div class="d-sm-flex flex-wrap align-content-start">
-      <% if @current_user.pendings.any? %>
-          <% @current_user.pendings.includes(:friend).each do |pending| %>
-            <div class="p-2 text-center border rounded m-1">
-              <%= link_to '', user_path(pending.friend_id), class: "user-avatar", style: "background-image: url(#{display_avatar(pending.friend)})" %>
-              <p class="text-white"><%= pending.friend.username %></p>
-            </div>
-          <% end %>
-      <% else %>
-        <p>No pendings</p>
-      <% end %>
-    </div>
-  <% end %>
-  <h5 class="text-decoration-none bg-color-orange w-75 py-3 mx-auto rounded text-center"><%= link_to 'Add Authors', users_path, class: 'text-decoration-none text-white' %></h5>
-  <h3 class="text-white">Articles written by: <%= @user.username %></h3>
-  <div class="w-90 avatar-big add-background rounded my-4" style="background-image: url(<%= display_avatar(@user) %>)">
-  </div>
-  <%= user_avatar(@user) if @current_user == @user %>
-  <div class="row m-0 flex-wrap w-100 align-content-start">
-    <%= check_user_articles(@user) %>
-  </div>
+<%= display_friendships(@current_user, @user) %>
+<h3 class="text-white">Articles written by: <%= @user.username %></h3>
+<div class="w-90 avatar-big add-background rounded my-4" style="background-image: url(<%= display_avatar(@user) %>)">
 </div>
+<%= user_avatar(@user) if @current_user == @user %>
+<div class="row m-0 flex-wrap w-100 align-content-start">
+  <%= check_user_articles(@user) %>
+</div>
+
 
 

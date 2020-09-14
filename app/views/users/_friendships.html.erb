@@ -1,0 +1,11 @@
+<div class="p-3">
+  <h4 class="text-white">Friendship requests</h4>
+  <div class="d-sm-flex flex-wrap align-content-start">
+    <%= show_requests %>
+  </div>
+  <h4 class="text-white">Friendship pendings</h4>
+  <div class="d-sm-flex flex-wrap align-content-start">
+    <%= show_pendings %>
+  </div>
+  <h5 class="text-decoration-none bg-color-orange w-75 py-3 mx-auto rounded text-center"><%= link_to 'Add Authors', users_path, class: 'text-decoration-none text-white' %></h5>
+</div>

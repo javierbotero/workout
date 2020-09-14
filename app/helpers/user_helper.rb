@@ -49,6 +49,50 @@ module UserHelper
   def check_user_articles(user)
     return unless user.articles.any?
 
-    render 'articles', user: @user
+    display_articles(user.articles)
+  end
+
+  def display_users(users)
+    html = ''
+    users.each do |user|
+      next if user == @current_user
+
+      html << content_tag(:div, class: 'vw-30 vh-25 p-2 border border-secondary m-2 rounded') do
+        link_to('',
+                user_path(user),
+                method: :get,
+                class: 'user-avatar',
+                style: "background-image: url(#{display_avatar(user)}") +
+          friendship_invitation(user)
+      end
+    end
+    html.html_safe
+  end
+
+  def show_requests
+    html = ''
+    if @current_user.requests.any?
+      @current_user.requests.includes(:user).each do |request|
+        html << content_tag(:div, class: 'p-2 text-center border rounded m-1') do
+          link_to('',
+                  user_path(request.user.id),
+                  method: :get,
+                  style: "background-image: url(#{display_avatar(request.user)});",
+                  class: 'user-avatar mx-auto') +
+            content_tag(:p, request.user.username, class: 'text-white') +
+            link_to('Accept',
+                    friendship_confirm_path(friend_id: request.user.id, friendship_id: request.id),
+                    method: :post,
+                    class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1') +
+            link_to('Deny',
+                    friendship_denied_path(friendship_id: request.id),
+                    method: :post,
+                    class: 'p-2 text-decoration-none bg-color-orange text-white rounded mx-1')
+        end
+      end
+    else
+      html << content_tag(:p, 'No requests')
+    end
+    html.html_safe
   end
 end

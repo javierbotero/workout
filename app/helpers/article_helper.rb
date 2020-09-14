@@ -58,7 +58,7 @@ module ArticleHelper
   end
 
   def picture_more_voted
-    if more_voted_article.main.attached?
+    if more_voted_article&.main&.attached?
       cloudinary_url(more_voted_article.main.key)
     else
       asset_path('workout1.jpg')

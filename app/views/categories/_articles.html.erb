@@ -1,20 +1,11 @@
-<% i = 0
-switcher = true
-sort_by_date(articles).each do |article| %>
- <div class="col-sm-6 d-flex bg-light p-0">
-   <div class="w-50 add-background<%= switcher ? ' order-1' : ' order-2' %>" style="background-image: url(<%= main_background(article) %>)">
-   </div>
-   <div class="w-50 p-2 d-flex flex-column justify-content-between<%= switcher ? ' order-2' : ' order-1' %>">
-     <h5 class="text-color-orange font-weight-bold"><%= @category.name %></h5>
-     <p class="font-weight-bold"><%= article.title %></p>
-     <%= vote_decision(@current_user.id, article) %>
-     <p><%= article.text[0..100] %>...</p>
-     <%= edit_article(@current_user, article) %>
-     <% i += 1
-        if i > 1
-          i = 0
-          switcher = switcher ? false : true
-        end %>
-   </div>
- </div>
-<% end %>
+<div class="col-md-6 d-flex bg-light p-0">
+  <div class="w-50 add-background order-1" style="background-image: url(<%= main_background(article) %>)">
+  </div>
+  <div class="w-50 p-2 d-flex flex-column justify-content-between order-2 text-break">
+    <h5 class="text-color-orange font-weight-bold"><%= category_nil(category) %></h5>
+    <p class="font-weight-bold text-dark"><%= article.title %></p>
+    <%= vote_decision(@current_user.id, article) %>
+    <p class="text-dark"><%= article.text[0..100] %>...</p>
+    <%= edit_article(@current_user, article) %>
+  </div>
+</div>

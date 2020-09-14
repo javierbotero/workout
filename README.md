@@ -22,18 +22,31 @@ When the user clicks the category name they can see all articles in that categor
 - RSpec
 - Cloudinary
 
-## Getting start
+## Getting started
 
 To start with the project:
 
 1. This project runs in Ruby and Ruby on Rails. It is recommended that you have installed Ruby 2.6.4p104 and Rails 6.0.3.2 due to this webapp runs in these versions.
 2. Fork this repository.
-3. Run bundle install inside the folder where the app lives.
-4. You need to tell Active Storage which service to use by setting Rails.application.config.active_storage.service = :local in config/environments/development.rb and in config/environments/test.rb for the upliadings functionality or set it to your vendor [more info](https://edgeguides.rubyonrails.org/active_storage_overview.html#setup).
+3. Run `bundle install` inside the folder where the app lives.
+4. Run rails db:create
+5. Run `bin/rails active_storage:install` to generate a migration that creates the two tables needed for the uploading functionality.
+6. Because this project relies on Cloudinary vendor for uploading pictures or media to the cloud in all environments, you need to have an account in Cloudinary to run successfully and upload any picture in the local environment. You can find more information about[Cloudinary here](https://cloudinary.com/documentation/rails_integration), and about [active storage here](https://edgeguides.rubyonrails.org/active_storage_overview.html#setup).
+7. This project uses environment variables that provide the credentials to access to Cloudinary, because this is sensitive information that should not be uploaded to source control it is recommended that you set up these variables in your environment named the same as in the file config/initializers/cloudinary.rb.
 5. Run the migration to database
     - rails db:migrate
 6. Run the rails server
     - rails server
+
+## Tests
+
+1. Add rspec-rails to both the :development and :test groups of your app’s Gemfile:
+    - group :development, :test do
+        gem 'rspec-rails', '~> 4.0.1'
+      end
+1. After having installed rails in your app run
+    - rails generate rspec:install
+3. Run `bundle exec rspec`
 
 ## Author
 

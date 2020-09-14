@@ -52,4 +52,36 @@ module ApplicationHelper
               user_path(@current_user.id),
               class: 'text-decoration-none color-app text-uppercase font-navbar')
   end
+
+  def show_errors_form(article)
+    html = ''
+    if article.errors.any?
+      html << content_tag(:div, class: 'p-3 bg-color-orange rounded') do
+        content_tag(:h5) do
+          pluralize(article.errors.count, 'error') + ' prohibited from being saved.'
+        end <<
+          content_tag(:ul) do
+            errors = ''
+            article.errors.full_messages.each do |msg|
+              errors << content_tag(:li, msg)
+            end
+            errors.html_safe
+          end
+      end
+    end
+    html.html_safe
+  end
+
+  def display_flahs(flash)
+    html = ''
+    if flash.any?
+      flash.each do |name, msg|
+        html << content_tag(:div,
+                            msg,
+                            class: "w-75 mx-auto
+ rounded d-flex justify-content-center align-items-center m-2 #{name}")
+      end
+    end
+    html.html_safe
+  end
 end
