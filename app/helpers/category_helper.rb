@@ -73,4 +73,13 @@ add-background text-decoration-none text-white p-3') do
     end
     html.html_safe
   end
+
+  def create_categories
+    return if Category.any?
+
+    Category.create(name: 'Indoors', priority: 1)
+    Category.create(name: 'Outdoors', priority: 2)
+    Category.create(name: 'Singly', priority: 3)
+    Category.create(name: 'Group', priority: 4)
+  end
 end
