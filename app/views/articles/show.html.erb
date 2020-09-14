@@ -1,0 +1,17 @@
+<%= link_edit_article(@current_user, @article) %>
+<h3 class="text-white text-center py-3"><%= @article.title %></h3>
+<div class="text-light d-sm-flex justify-content-between py-3">
+  <span>written by: <%= @article.author.username %></span>
+  <span>Categories: <% @article.categories.map(&:name).each do |name| %>
+    <%= "#{name} | "%>
+  <% end %>
+  </span>
+  <%= vote_decision(@current_user.id, @article) %>
+  <%= friendship_invitation(@article.author) %>
+</div>
+<%= show_main_picture(@article) %>
+<%= show_main(@article) %>
+<p class="text-white py-4"><%= @article.text[0..(@article.text.length/2)] %></p>
+<%= display_pictures_with_delete(@article) %>
+<%= attach_photos(@article) %>
+<p class="text-white py-4"><%= @article.text[(@article.text.length/2)..-1] %></p>

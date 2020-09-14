@@ -1,0 +1,16 @@
+<div class="container-fluid h-index-c p-0">
+  <% create_categories %>
+  <div class="progress design-bar">
+    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <%= link_to more_voted_link,
+              style: "background-image: linear-gradient(to bottom, transparent, 80%, rgba(0, 0, 0, .7)),
+                                        url(#{picture_more_voted})",
+              class: 'container-fluid d-flex flex-column-reverse h-75 main-picture add-background text-decoration-none' do %>
+    <h3 class="order-2 text-color-orange"><%= title_more_voted %></h3>
+    <p class="order-1 text-white"><%= text_more_voted[0..20] << '...' %></p>
+  <% end %>
+  <div class="container-fluid row p-0 h-25 m-0">
+    <%= display_articles_show_page(@categories) %>
+  </div>
+</div>

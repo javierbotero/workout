@@ -1,0 +1,5 @@
+<%= form_tag loggin_path, class: 'd-flex flex-column bg-color-orange p-5 rounded' do %>
+  <%= label_tag :username, 'User name', class: 'text-light text-center' %><br>
+  <%= text_field_tag :username, '', class: 'rounded' %><br><br>
+  <%= submit_tag 'Submit', class: 'rounded' %><br>
+<% end %>

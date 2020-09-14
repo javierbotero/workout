@@ -1,0 +1,9 @@
+<nav class="d-sm-flex justify-content-between bg-light w-100 h-navbar px-3 align-items-center font-footer">
+  <%= render 'layouts/logo' %>
+  <div>
+    <%= display_middle_links(@current_user) %>
+  </div>
+  <div>
+    <%= display_links(@current_user) %>
+  </div>
+</nav>

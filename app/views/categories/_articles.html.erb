@@ -1,0 +1,11 @@
+<div class="col-md-6 d-flex bg-light p-0">
+  <div class="w-50 add-background order-1" style="background-image: url(<%= main_background(article) %>)">
+  </div>
+  <div class="w-50 p-2 d-flex flex-column justify-content-between order-2 text-break">
+    <h5 class="text-color-orange font-weight-bold"><%= category_nil(category) %></h5>
+    <p class="font-weight-bold text-dark"><%= article.title %></p>
+    <%= vote_decision(@current_user.id, article) %>
+    <p class="text-dark"><%= article.text[0..100] %>...</p>
+    <%= edit_article(@current_user, article) %>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<%= form_with model: user, local: true, class: 'd-flex flex-column py-5 mx-auto text-center' do |f| %>
+  <%= f.label :username, 'User name' %><br>
+  <%= f.text_field :username %><br><br>
+  <%= f.label :avatar, 'Upload a picture avatar' %><br>
+  <%= f.file_field(:avatar, direct_upload: true, class: 'py-2') unless user.avatar.attached? %>
+  <%= display_avatar_in_form(user) %>
+  <%= f.submit 'Submit' %>
+<% end %>

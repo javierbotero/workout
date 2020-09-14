@@ -1,0 +1,117 @@
+$bg-dark-gray: rgb(77, 68, 63);
+$bg-orange: rgb(234, 106, 44);
+
+@mixin custom-background {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+a {
+  text-decoration: none;
+  color: $bg-orange;
+}
+
+.add-background {
+  @include custom-background;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: block;
+}
+
+.logo-width {
+  width: 46px;
+}
+
+.design-bar {
+  height: 0.5vh;
+}
+
+.h-index-c {
+  height: 92.5vh;
+}
+
+.h-show-c {
+  min-height: 89vh;
+}
+
+.text-color-orange {
+  color: $bg-orange;
+}
+
+.bg-color-orange {
+  background-color: $bg-orange;
+}
+
+a:hover {
+  color: gray;
+}
+
+.background-app {
+  background-color: $bg-dark-gray;
+}
+
+.color-app {
+  color: $bg-dark-gray;
+}
+
+.padding-icons {
+  padding: 0 4px !important;
+}
+
+.font-footer {
+  font-size: small;
+}
+
+.font-navbar {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 900;
+}
+
+.flash {
+  height: 50px;
+}
+
+.alert {
+  background: $bg-orange;
+  color: white;
+}
+
+.notice {
+  background: $bg-dark-gray;
+  color: white;
+}
+
+@media (min-height: 600px) {
+  .h-navbar {
+    height: 7vh;
+  }
+}
+
+@media (max-width: 599px) {
+  .avatar-big {
+    height: 300px;
+  }
+}
+
+@media (min-width: 600px) {
+  .avatar-big {
+    height: 600px;
+  }
+
+  .h-footer {
+    height: 11vh;
+  }
+}
+
+@media (min-width: 900px) {
+  .avatar-big {
+    height: 900px;
+  }
+}
